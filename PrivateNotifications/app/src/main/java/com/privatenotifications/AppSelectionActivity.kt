@@ -76,30 +76,29 @@ class AppSelectionActivity : AppCompatActivity() {
      * Loads all installed apps and displays them in RecyclerView
      */
     private fun loadInstalledApps() {
-        val packageManager = packageManager
-        val apps = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
-            .filter { isUserApp(it) }  // Filter out system apps
-            .map { appInfo ->
-                AppItem(
-                    packageName = appInfo.packageName,
-                    appName = appInfo.loadLabel(packageManager).toString(),
-                    icon = appInfo.loadIcon(packageManager),
-                    isSelected = selectedApps.contains(appInfo.packageName)
-                )
-            }
-            .sortedBy { it.appName.lowercase() }  // Sort alphabetically
+    val packageManager = packageManager
 
-        adapter = AppAdapter(apps) { packageName, isSelected ->
-            if (isSelected) {
-                selectedApps.add(packageName)
-            } else {
-                selectedApps.remove(packageName)
-            }
+    val apps = packageManager.getInstalledApplications(0)
+        .filter {
+            packageManager.getLaunchIntentForPackage(it.packageName) != null
         }
-        
-        recyclerView.adapter = adapter
+        .map { appInfo ->
+            AppItem(
+                packageName = appInfo.packageName,
+                appName = appInfo.loadLabel(packageManager).toString(),
+                icon = appInfo.loadIcon(packageManager),
+                isSelected = selectedApps.contains(appInfo.packageName)
+            )
+        }
+        .sortedBy { it.appName.lowercase() }
+
+    adapter = AppAdapter(apps) { packageName, isSelected ->
+        if (isSelected) selectedApps.add(packageName)
+        else selectedApps.remove(packageName)
     }
 
+    recyclerView.adapter = adapter
+}
     /**
      * Checks if app is a user-installed app (not system app)
      */

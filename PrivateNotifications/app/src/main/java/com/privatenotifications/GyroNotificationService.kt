@@ -63,7 +63,11 @@ class GyroNotificationService : NotificationListenerService(), SensorEventListen
     // Phone state tracking
     private var isFaceDown = false
     private var lastOrientation = 0f
-    
+    // 🔥 NEW: Movement detection
+    private var lastX = 0f
+    private var lastY = 0f
+    private var lastZ = 0f
+    private var isMoving = false
     // Utilities
     private lateinit var prefs: SharedPreferences
     private lateinit var vibrator: Vibrator
@@ -268,32 +272,30 @@ class GyroNotificationService : NotificationListenerService(), SensorEventListen
     override fun onSensorChanged(event: SensorEvent?) {
         if (event == null || event.sensor.type != Sensor.TYPE_ACCELEROMETER) return
         
-        // Get Z-axis value (vertical axis)
         val z = event.values[2]
-        
-        // Debounce: Only process if orientation changed significantly
-        if (Math.abs(z - lastOrientation) < 2.0f) {
-            return
-        }
-        
-        lastOrientation = z
-        
-        // Detect face-down position
-        if (z < FACE_DOWN_THRESHOLD && !isFaceDown) {
-            isFaceDown = true
-            Log.d(TAG, "Phone is now FACE-DOWN (Z=$z)")
-            updateForegroundNotification("Phone face-down - Hiding notifications")
-        }
-        // Detect face-up position
-        else if (z > FACE_UP_THRESHOLD && isFaceDown) {
-            isFaceDown = false
-            Log.d(TAG, "Phone is now FACE-UP (Z=$z)")
-            updateForegroundNotification("Phone face-up - Notifications visible")
-            
-            // Restore all hidden notifications
-            restoreAllNotifications()
-        }
-    }
+
+// Debounce: Only process if orientation changed significantly
+if (Math.abs(z - lastOrientation) < 2.0f) {
+    return
+}
+
+lastOrientation = z
+
+// Detect face-down position
+if (z < FACE_DOWN_THRESHOLD && !isFaceDown) {
+    isFaceDown = true
+    Log.d(TAG, "Phone is now FACE-DOWN (Z=$z)")
+    updateForegroundNotification("Phone face-down - Hiding notifications")
+}
+// Detect face-up position
+else if (z > FACE_UP_THRESHOLD && isFaceDown) {
+    isFaceDown = false
+    Log.d(TAG, "Phone is now FACE-UP (Z=$z)")
+    updateForegroundNotification("Phone face-up - Notifications visible")
+
+    // Restore all hidden notifications
+    restoreAllNotifications()
+}
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         // Not needed for this use case

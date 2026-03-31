@@ -1,0 +1,328 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   PRIVATE NOTIFICATIONS - QUICK REFERENCE                ║
+║                         All Commands in One Place                        ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📦 INITIAL SETUP (Run Once)                                             │
+└──────────────────────────────────────────────────────────────────────────┘
+
+1. Extract ZIP:
+   unzip PrivateNotifications.zip
+   cd PrivateNotifications
+
+2. Make executable (Mac/Linux only):
+   chmod +x gradlew
+
+3. Install dependencies:
+   ./gradlew build --refresh-dependencies        # Mac/Linux
+   gradlew.bat build --refresh-dependencies      # Windows
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🏗️ BUILD COMMANDS                                                        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Clean build:
+   ./gradlew clean                                # Mac/Linux
+   gradlew.bat clean                              # Windows
+
+Build debug APK:
+   ./gradlew assembleDebug                        # Mac/Linux
+   gradlew.bat assembleDebug                      # Windows
+
+Build release APK:
+   ./gradlew assembleRelease                      # Mac/Linux
+   gradlew.bat assembleRelease                    # Windows
+
+Clean + Build:
+   ./gradlew clean assembleDebug                  # Mac/Linux
+   gradlew.bat clean assembleDebug                # Windows
+
+APK Location:
+   app/build/outputs/apk/debug/app-debug.apk
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📱 INSTALL ON PHONE                                                     │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Check connected devices:
+   adb devices
+
+Install APK:
+   adb install app/build/outputs/apk/debug/app-debug.apk
+
+Reinstall (if already installed):
+   adb install -r app/build/outputs/apk/debug/app-debug.apk
+
+Uninstall app:
+   adb uninstall com.privatenotifications
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🐛 DEBUGGING                                                            │
+└──────────────────────────────────────────────────────────────────────────┘
+
+View all logs:
+   adb logcat
+
+View app logs only:
+   adb logcat -s PrivateNotifications
+
+View service logs:
+   adb logcat -s GyroNotificationService
+
+Clear logs:
+   adb logcat -c
+
+Save logs to file:
+   adb logcat -s GyroNotificationService > logs.txt
+
+View logs with timestamps:
+   adb logcat -v time -s GyroNotificationService
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🔧 ADB TROUBLESHOOTING                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Restart ADB server:
+   adb kill-server
+   adb start-server
+
+List all packages:
+   adb shell pm list packages
+
+Check if app is installed:
+   adb shell pm list packages | grep privatenotifications
+
+Get app info:
+   adb shell dumpsys package com.privatenotifications
+
+Launch app:
+   adb shell am start -n com.privatenotifications/.MainActivity
+
+Force stop app:
+   adb shell am force-stop com.privatenotifications
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🚀 VS CODE SHORTCUTS                                                    │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Open terminal:
+   Ctrl + ` (backtick)
+
+Run build task:
+   Ctrl + Shift + B
+
+Open command palette:
+   Ctrl + Shift + P
+
+Search files:
+   Ctrl + P
+
+Find in project:
+   Ctrl + Shift + F
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  ⚙️ ENVIRONMENT VARIABLES                                                │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Set ANDROID_HOME (Mac/Linux):
+   export ANDROID_HOME=$HOME/Library/Android/sdk         # Mac
+   export ANDROID_HOME=$HOME/Android/Sdk                 # Linux
+   export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+Set ANDROID_HOME (Windows):
+   setx ANDROID_HOME "C:\Users\YourName\AppData\Local\Android\Sdk"
+   setx PATH "%PATH%;%ANDROID_HOME%\platform-tools"
+
+Check ANDROID_HOME:
+   echo $ANDROID_HOME           # Mac/Linux
+   echo %ANDROID_HOME%          # Windows
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📂 PROJECT STRUCTURE                                                    │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Source code:
+   app/src/main/java/com/privatenotifications/
+
+Main service:
+   app/src/main/java/com/privatenotifications/GyroNotificationService.kt
+
+UI layouts:
+   app/src/main/res/layout/
+
+App colors:
+   app/src/main/res/values/colors.xml
+
+App name:
+   app/src/main/res/values/strings.xml
+
+Permissions:
+   app/src/main/AndroidManifest.xml
+
+Build config:
+   app/build.gradle
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🎨 CUSTOMIZATION                                                        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Change app name:
+   Edit: app/src/main/res/values/strings.xml
+   Find: <string name="app_name">Private Notifications</string>
+
+Change app colors:
+   Edit: app/src/main/res/values/colors.xml
+   Modify: <color name="purple_500">#FF6200EE</color>
+
+Change detection sensitivity:
+   Edit: app/src/main/java/.../GyroNotificationService.kt
+   Find: FACE_DOWN_THRESHOLD = -8.0f
+   Adjust value (more negative = less sensitive)
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🔍 COMMON BUILD ERRORS & FIXES                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Error: "ANDROID_HOME is not set"
+Fix:  Set ANDROID_HOME env variable, then RESTART computer
+
+Error: "SDK location not found"
+Fix:  Create local.properties file with:
+      sdk.dir=/path/to/Android/Sdk
+
+Error: "Permission denied: ./gradlew"
+Fix:  chmod +x gradlew
+
+Error: "Could not find or load main class"
+Fix:  ./gradlew wrapper --gradle-version=8.0
+
+Error: Build stuck/frozen
+Fix:  Ctrl+C to cancel, then:
+      ./gradlew clean
+      ./gradlew assembleDebug --refresh-dependencies
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📱 PHONE SETUP CHECKLIST                                                │
+└──────────────────────────────────────────────────────────────────────────┘
+
+□ Enable Developer Options (tap Build Number 7 times)
+□ Enable USB Debugging in Developer Options
+□ Connect phone via USB
+□ Allow USB debugging popup on phone
+□ Verify connection: adb devices
+□ Install app: adb install app-debug.apk
+□ Launch app on phone
+□ Grant Notification Access permission
+□ Select apps to monitor
+□ Enable Privacy Mode toggle
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🧪 TESTING COMMANDS                                                     │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Test if service is running:
+   adb shell dumpsys activity services | grep GyroNotificationService
+
+Check notification permissions:
+   adb shell cmd notification allow_listener com.privatenotifications/...
+
+Test orientation:
+   Place phone face-down → Send notification → Should hide
+   Flip phone face-up → Notification should appear
+
+View sensor data:
+   adb shell dumpsys sensorservice
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🌐 GIT COMMANDS (Push to GitHub)                                       │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Initialize Git:
+   git init
+   git add .
+   git commit -m "Initial commit"
+
+Add remote:
+   git remote add origin https://github.com/username/repo.git
+
+Push to GitHub:
+   git branch -M main
+   git push -u origin main
+
+Check status:
+   git status
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📚 DOCUMENTATION FILES                                                  │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Start here:
+   README_FIRST.txt              Complete overview
+
+Quick setup:
+   COMPLETE_SETUP_GUIDE.md       Step-by-step setup (this is THE guide!)
+   QUICKSTART.md                 5-minute setup
+
+Detailed guides:
+   BUILD_GUIDE.md                Detailed build instructions
+   TESTING_GUIDE.md              Testing procedures
+
+Reference:
+   README.md                     Main documentation
+   PROJECT_SUMMARY.md            Technical details
+   INDEX.md                      File listing
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  ⚡ AUTOMATED BUILD SCRIPTS                                              │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Mac/Linux:
+   ./build.sh                    Build debug APK
+   ./build.sh --release          Build release APK
+   ./build.sh --install          Build + install on phone
+   ./build.sh --clean --install  Clean + build + install
+
+Windows:
+   build.bat                     Build debug APK
+   build.bat --release           Build release APK
+   build.bat --install           Build + install on phone
+   build.bat --clean --install   Clean + build + install
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  🎯 TYPICAL WORKFLOW                                                     │
+└──────────────────────────────────────────────────────────────────────────┘
+
+First time:
+   1. unzip PrivateNotifications.zip
+   2. cd PrivateNotifications
+   3. chmod +x gradlew (Mac/Linux)
+   4. ./gradlew build --refresh-dependencies
+   5. ./gradlew assembleDebug
+   6. adb install app/build/outputs/apk/debug/app-debug.apk
+
+Making changes:
+   1. Edit files in VS Code
+   2. ./gradlew clean assembleDebug
+   3. adb install -r app/build/outputs/apk/debug/app-debug.apk
+   4. Test on phone
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│  💡 TIPS & TRICKS                                                        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+• Use --refresh-dependencies if build fails after dependency changes
+• Always run 'clean' before release builds
+• Use -r flag with adb install to reinstall without uninstalling
+• Check logs if app crashes: adb logcat -s GyroNotificationService
+• First build takes 5-10 minutes (downloads dependencies)
+• Subsequent builds take 1-2 minutes
+• APK size: ~5-8 MB debug, ~3-5 MB release
+• Disable battery optimization for reliable service
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║                          BOOKMARK THIS FILE!                             ║
+║              Everything you need is on this one page                     ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+For detailed explanations, see: COMPLETE_SETUP_GUIDE.md

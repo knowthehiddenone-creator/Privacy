@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- App Title -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/subtitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Galaxy-style notification privacy"
+            android:textSize="14sp"
+            android:textColor="@color/purple_500"
+            app:layout_constraintTop_toBottomOf="@id/titleText"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <!-- Status Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/subtitleText">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/statusLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/statusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Privacy mode is OFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Enable Service Toggle -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/toggleCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/statusCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enable Privacy Mode"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hide notifications when face-down"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/serviceToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Permission Button -->
+        <Button
+            android:id="@+id/permissionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grant Notification Access"
+            android:textAllCaps="false"
+            android:padding="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/toggleCard" />
+
+        <!-- Select Apps Button -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/selectAppsCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintTop_toBottomOf="@id/permissionButton">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="App Selection"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose which apps to monitor"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginTop="4dp" />
+
+                <Button
+                    android:id="@+id/selectAppsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Apps"
+                    android:textAllCaps="false"
+                    android:layout_marginTop="12dp"
+                    style="@style/Widget.Material3.Button.OutlinedButton" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- How It Works Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/howItWorksCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:cardBackgroundColor="@color/purple_50"
+            app:layout_constraintTop_toBottomOf="@id/selectAppsCard">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📱 How It Works"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1. Place phone face-down → Notifications hidden\n2. Flip phone face-up → Notifications restored\n3. Works only for selected apps\n4. Automatic and instant"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

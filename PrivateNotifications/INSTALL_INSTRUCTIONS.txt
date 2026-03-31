@@ -1,0 +1,198 @@
+================================================================================
+  PRIVATE NOTIFICATIONS - INSTALLATION INSTRUCTIONS
+================================================================================
+
+Congratulations! You have received the complete Private Notifications Android
+app project. Follow these simple steps to get started.
+
+================================================================================
+  QUICK START (5 MINUTES)
+================================================================================
+
+1. EXTRACT THE PROJECT
+   - Extract PrivateNotifications.tar.gz (or the PrivateNotifications folder)
+   - Place it anywhere on your computer
+
+2. INSTALL PREREQUISITES
+   - Java JDK 11+ (download: https://adoptium.net/)
+   - Android SDK (easiest: install Android Studio from developer.android.com)
+   - Set ANDROID_HOME environment variable
+
+3. BUILD THE APK
+   Open terminal/command prompt in the project directory and run:
+
+   Mac/Linux:
+     chmod +x gradlew build.sh
+     ./build.sh
+
+   Windows:
+     build.bat
+
+   Or manually:
+     ./gradlew assembleDebug (Mac/Linux)
+     gradlew.bat assembleDebug (Windows)
+
+4. INSTALL ON PHONE
+   - Enable USB debugging on your Android phone
+   - Connect via USB
+   - Run: adb install app/build/outputs/apk/debug/app-debug.apk
+
+   Or copy app-debug.apk to your phone and install manually
+
+5. CONFIGURE THE APP
+   - Open Private Notifications app
+   - Grant notification access permission
+   - Select apps to monitor (WhatsApp, Gmail, etc.)
+   - Enable privacy mode
+
+6. TEST IT!
+   - Place phone face-down
+   - Send yourself a notification
+   - It should be hidden!
+   - Flip phone face-up to restore
+
+================================================================================
+  PROJECT STRUCTURE
+================================================================================
+
+PrivateNotifications/
+├── README.md                    ← START HERE! Main documentation
+├── QUICKSTART.md                ← 5-minute setup guide
+├── BUILD_GUIDE.md               ← Detailed build instructions
+├── TESTING_GUIDE.md             ← How to test the app
+├── build.sh / build.bat         ← Automated build scripts
+├── app/
+│   ├── src/main/
+│   │   ├── java/                ← Kotlin source code
+│   │   ├── res/                 ← UI layouts and resources
+│   │   └── AndroidManifest.xml  ← App configuration
+│   └── build.gradle             ← Build configuration
+└── ...
+
+================================================================================
+  IMPORTANT FILES TO READ
+================================================================================
+
+1. README.md          - Complete project overview
+2. QUICKSTART.md      - Get running in 5 minutes
+3. BUILD_GUIDE.md     - Detailed build instructions
+4. TESTING_GUIDE.md   - How to test all features
+5. PROJECT_SUMMARY.md - Complete technical summary
+
+================================================================================
+  GETTING HELP
+================================================================================
+
+Having issues? Check these files:
+- BUILD_GUIDE.md → Section "Troubleshooting Common Build Issues"
+- TESTING_GUIDE.md → Section "Troubleshooting Common Issues"
+
+Still stuck? The documentation includes solutions for:
+✓ ANDROID_HOME not set
+✓ Gradle build errors
+✓ ADB installation issues
+✓ Permission problems
+✓ And more...
+
+================================================================================
+  WHAT THIS APP DOES
+================================================================================
+
+Private Notifications automatically hides notifications when your phone is
+placed face-down on a table. When you flip it face-up, all notifications are
+instantly restored.
+
+Features:
+✓ Automatic notification hiding (face-down)
+✓ Automatic restoration (face-up)
+✓ Per-app selection (choose which apps)
+✓ Uses phone's built-in accelerometer
+✓ No internet required (100% offline)
+✓ Battery-optimized
+✓ Material Design UI
+
+Perfect for:
+• Meetings and presentations
+• Coffee shops and public places
+• Dinner with friends
+• Any situation where you want instant privacy
+
+================================================================================
+  SYSTEM REQUIREMENTS
+================================================================================
+
+Development:
+- Java JDK 11 or higher
+- Android SDK (API 24-34)
+- Gradle 8.0+
+- 2 GB free disk space
+
+Runtime:
+- Android 7.0 (API 24) or higher
+- Device with accelerometer sensor
+- ~30 MB storage space
+
+================================================================================
+  BUILD COMMANDS REFERENCE
+================================================================================
+
+# Clean build
+./gradlew clean
+
+# Build debug APK
+./gradlew assembleDebug
+
+# Build release APK
+./gradlew assembleRelease
+
+# Install on device
+adb install app/build/outputs/apk/debug/app-debug.apk
+
+# View logs
+adb logcat -s GyroNotificationService
+
+# Automated build + install (Mac/Linux)
+./build.sh --clean --install
+
+# Automated build + install (Windows)
+build.bat --clean --install
+
+================================================================================
+  NEXT STEPS
+================================================================================
+
+1. Read README.md for complete overview
+2. Follow QUICKSTART.md to build your first APK
+3. Install on your phone and test
+4. Modify the code if needed
+5. Share or contribute improvements!
+
+================================================================================
+  LICENSE & USAGE
+================================================================================
+
+This project is licensed under the MIT License.
+You are free to:
+✓ Use it personally
+✓ Modify it
+✓ Distribute it
+✓ Use it commercially
+
+See LICENSE file for full details.
+
+================================================================================
+  SUPPORT
+================================================================================
+
+For issues, questions, or contributions:
+- Read the documentation files (especially BUILD_GUIDE.md)
+- Check TESTING_GUIDE.md for troubleshooting
+- Review CONTRIBUTING.md if you want to contribute
+
+================================================================================
+
+Ready to get started? Open README.md and begin!
+
+Enjoy your privacy-enhanced notifications! 🎉
+
+================================================================================

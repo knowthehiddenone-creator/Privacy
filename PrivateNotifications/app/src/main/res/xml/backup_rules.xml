@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Exclude specific files or directories from backup -->
+    <!-- This is optional, but good practice for privacy apps -->
+    <exclude domain="sharedpref" path="PrivateNotificationsPrefs.xml"/>
+</full-backup-content>
